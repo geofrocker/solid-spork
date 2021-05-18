@@ -1,10 +1,20 @@
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.2.6
-  node: circleci/node@2.0.2
+  node: circleci/node@4.3.0
+jobs:
+  install-node:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+      - run: node --version
 workflows:
   heroku_deploy:
     jobs:
+      - install-node
       - heroku/deploy-via-git:
           app-name: $HEROKU_PRODUCTION_APP_NAME
           filters:
@@ -12,9 +22,6 @@ workflows:
               only: master
           pre-steps:
             - checkout
-            - node/with-cache:
-                steps:
-                  - run: npm install
             - run: npm test
 
       - heroku/deploy-via-git:
@@ -24,7 +31,4 @@ workflows:
               only: staging
           pre-steps:
             - checkout
-            - node/with-cache:
-                steps:
-                  - run: npm install
             - run: npm test

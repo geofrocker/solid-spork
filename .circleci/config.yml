@@ -3,14 +3,6 @@ orbs:
   heroku: circleci/heroku@1.2.6
   node: circleci/node@4.3.0
 jobs:
-  install-node:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - checkout
-      - node/install:
-          install-yarn: true
-      - run: node --version
   run-tests:
     executor: node/default
     steps:
@@ -22,7 +14,6 @@ jobs:
 workflows:
   heroku_deploy:
     jobs:
-      - install-node
       - run-tests
       - heroku/deploy-via-git:
           requires:

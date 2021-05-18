@@ -1,7 +1,12 @@
 version: 2.1
 orbs:
-  heroku: circleci/heroku@0.0.10
+  heroku: circleci/heroku@1.2.6
 workflows:
   heroku_deploy:
     jobs:
-      - heroku/deploy-via-git
+      - heroku/deploy-via-git:
+          app_name: $HEROKU_PRODUCTION_APP_NAME
+          branch: master
+      - heroku/deploy-via-git:
+          app_name: $HEROKU_STAGING_APP_NAME
+          branch: staging

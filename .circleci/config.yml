@@ -4,9 +4,9 @@ orbs:
 workflows:
   heroku_deploy:
     jobs:
-      - staging:
+      - heroku/deploy-via-git:
           app-name: $HEROKU_PRODUCTION_APP_NAME
           branch: master
-      - production:
+      - heroku/deploy-via-git:
           app-name: $HEROKU_STAGING_APP_NAME
           branch: staging

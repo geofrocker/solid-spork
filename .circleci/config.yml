@@ -31,4 +31,5 @@ orbs:
 workflows:
   heroku_deploy:
     jobs:
-      - deploy
+      - staging-deploy
+      - production-deploy

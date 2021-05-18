@@ -18,7 +18,6 @@ workflows:
       - heroku/deploy-via-git:
           requires:
             - install-node
-          executor: node/default
           app-name: $HEROKU_PRODUCTION_APP_NAME
           filters:
             branches:

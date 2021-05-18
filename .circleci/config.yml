@@ -6,7 +6,11 @@ workflows:
     jobs:
       - heroku/deploy-via-git:
           app-name: $HEROKU_PRODUCTION_APP_NAME
-          branch: master
+          filters:
+            branches:
+              only: staging
       - heroku/deploy-via-git:
           app-name: $HEROKU_STAGING_APP_NAME
-          branch: staging
+          filters:
+            branches:
+              only: staging

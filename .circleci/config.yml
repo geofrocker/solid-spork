@@ -9,8 +9,17 @@ workflows:
           filters:
             branches:
               only: master
+          steps:
+            - run:
+              name: Running tests
+              command: yarn test
+
       - heroku/deploy-via-git:
           app-name: $HEROKU_STAGING_APP_NAME
           filters:
             branches:
               only: staging
+          steps:
+            - run:
+              name: Running tests
+              command: yarn test

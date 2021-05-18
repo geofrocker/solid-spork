@@ -10,9 +10,7 @@ workflows:
             branches:
               only: master
           pre-steps:
-            - run:
-              name: Running tests
-              command: yarn test
+            - run: yarn test
 
       - heroku/deploy-via-git:
           app-name: $HEROKU_STAGING_APP_NAME
@@ -20,6 +18,4 @@ workflows:
             branches:
               only: staging
           pre-steps:
-            - run:
-              name: Running tests
-              command: yarn test
+            - run: yarn test

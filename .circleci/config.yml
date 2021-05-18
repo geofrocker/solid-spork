@@ -17,7 +17,7 @@ workflows:
       - run-tests
       - heroku/deploy-via-git:
           requires:
-            - install-node
+            - run-tests
           app-name: $HEROKU_PRODUCTION_APP_NAME
           filters:
             branches:
@@ -27,7 +27,7 @@ workflows:
 
       - heroku/deploy-via-git:
           requires:
-                - install-node
+            - run-tests
           app-name: $HEROKU_STAGING_APP_NAME
           filters:
             branches:

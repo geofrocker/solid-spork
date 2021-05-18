@@ -11,10 +11,19 @@ jobs:
       - node/install:
           install-yarn: true
       - run: node --version
+  run-tests:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-path: ~/express-prj/node_modules
+          override-ci-command: npm install
+      - run: npm run test
 workflows:
   heroku_deploy:
     jobs:
       - install-node
+      - run-tests
       - heroku/deploy-via-git:
           requires:
             - install-node
@@ -23,7 +32,7 @@ workflows:
             branches:
               only: master
           pre-steps:
-            - install-node
+            - checkout
 
       - heroku/deploy-via-git:
           requires:
@@ -33,4 +42,4 @@ workflows:
             branches:
               only: staging
           pre-steps:
-            - install-node
+            - checkout

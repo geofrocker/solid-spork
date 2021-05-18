@@ -7,7 +7,7 @@ describe(" Json Requests", () => {
       .get("/")
       .send({ request: "json-request" })
       .then(res => {
-        expect(res.statusCode).toBe(400);
+        expect(res.statusCode).toBe(200);
         done();
       });
   });

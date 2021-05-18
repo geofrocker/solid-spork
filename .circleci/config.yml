@@ -23,11 +23,7 @@ workflows:
             branches:
               only: master
           pre-steps:
-            - checkout
-            - node/install-packages:
-                cache-path: ~/express-prj/node_modules
-                override-ci-command: npm install
-            - run: npm run test
+            - install-node
 
       - heroku/deploy-via-git:
           requires:
@@ -37,8 +33,4 @@ workflows:
             branches:
               only: staging
           pre-steps:
-            - checkout
-            - node/install-packages:
-                cache-path: ~/express-prj/node_modules
-                override-ci-command: npm install
-            - run: npm run test
+            - install-node

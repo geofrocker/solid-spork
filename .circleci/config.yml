@@ -10,6 +10,10 @@ workflows:
             branches:
               only: master
           pre-steps:
+            - checkout
+            - node/with-cache:
+                steps:
+                  - run: npm install
             - run: npm test
 
       - heroku/deploy-via-git:
@@ -18,4 +22,8 @@ workflows:
             branches:
               only: staging
           pre-steps:
+            - checkout
+            - node/with-cache:
+                steps:
+                  - run: npm install
             - run: npm test
